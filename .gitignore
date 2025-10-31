@@ -1,0 +1,83 @@
+# General Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+*.eggs/
+dist/
+build/
+
+# Tooling and test outputs
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+.nox/
+.tox/
+.coverage*
+coverage.xml
+htmlcov/
+.cache/
+
+# Environment and configuration
+.env
+.env.*
+*.env
+*.ini.lock
+*.yaml.lock
+
+# Logs and local data
+logs/
+*.log
+*.tmp
+*.sqlite3
+data/audio/
+
+# Project directories
+backend/app/model/
+whisper.cpp/
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# Whisper.cpp build outputs
+whisper.cpp/build*/
+whisper.cpp/**/CMakeFiles/
+whisper.cpp/**/CMakeCache.txt
+whisper.cpp/**/cmake_install.cmake
+whisper.cpp/**/Makefile
+whisper.cpp/**/compile_commands.json
+whisper.cpp/**/.ninja_deps
+whisper.cpp/**/.ninja_log
+whisper.cpp/**/CMakeScripts/
+whisper.cpp/**/Testing/
+whisper.cpp/**/tmp/
+whisper.cpp/**/*.o
+whisper.cpp/**/*.obj
+whisper.cpp/**/*.so
+whisper.cpp/**/*.dll
+whisper.cpp/**/*.exe
+whisper.cpp/**/*.a
+whisper.cpp/**/*.lib
+whisper.cpp/**/*.pdb
+
+# Whisper.cpp downloaded models
+whisper.cpp/models/*.bin
+whisper.cpp/models/*.ggml
+whisper.cpp/models/*.gguf

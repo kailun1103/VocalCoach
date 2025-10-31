@@ -1,0 +1,14 @@
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+pydantic-settings==2.2.1
+httpx==0.27.0
+
+
+# https://huggingface.co/ggerganov/whisper.cpp/tree/main
+
+# https://elevenlabs.io/?utm_source=chatgpt.com
+
+# https://rhasspy.github.io/piper-samples/#en_US-amy-medium
+
+# https://github.com/rhasspy/piper
