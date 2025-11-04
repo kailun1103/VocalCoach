@@ -1,0 +1,43 @@
+{
+  "nav": {"chat": "Chat", "tts": "TTS", "stt": "STT", "settings": "Settings"},
+  "chat": {
+    "title": "Chat",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "clear": "Clear",
+    "confirmClear": "Clear the conversation?",
+    "regenerate": "Regenerate",
+    "streaming": "Streaming",
+    "temperature": "Temperature",
+    "maxTokens": "Max tokens"
+  },
+  "tts": {
+    "title": "Text to Speech",
+    "input": {"label": "Text", "placeholder": "Enter text to speak"},
+    "generate": "Generate",
+    "duration": "Duration"
+  },
+  "stt": {
+    "title": "Speech to Text",
+    "uploadLabel": "Upload WAV file",
+    "transcript": "Transcript",
+    "durationMs": "Duration (ms)",
+    "submit": "Transcribe",
+    "acceptHint": "Only WAV files are supported"
+  },
+  "voice": {
+    "record": "Record",
+    "stop": "Stop",
+    "recording": "Recording",
+    "transcribing": "Transcribing...",
+    "speaking": "Speaking..."
+  },
+  "settings": {
+    "title": "Settings",
+    "apiBaseUrl": "API Base URL",
+    "streaming": "Use streaming",
+    "language": "Language",
+    "save": "Save"
+  },
+  "common": {"copy": "Copy", "copied": "Copied", "download": "Download", "error": "Error"}
+}

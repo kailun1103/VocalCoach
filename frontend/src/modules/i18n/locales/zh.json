@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "chat": "對話",
+    "tts": "文字轉語音",
+    "stt": "語音轉文字",
+    "settings": "設定"
+  },
+  "chat": {
+    "title": "對話",
+    "placeholder": "輸入訊息...",
+    "send": "送出",
+    "clear": "清除",
+    "confirmClear": "要清除整段對話嗎？",
+    "regenerate": "重新生成",
+    "streaming": "串流",
+    "temperature": "溫度",
+    "maxTokens": "最大 token 數"
+  },
+  "tts": {
+    "title": "文字轉語音",
+    "input": {
+      "label": "文字",
+      "placeholder": "輸入要轉成語音的文字"
+    },
+    "generate": "產生語音",
+    "duration": "長度"
+  },
+  "stt": {
+    "title": "語音轉文字",
+    "uploadLabel": "上傳 WAV 檔案",
+    "transcript": "轉寫結果",
+    "durationMs": "耗時 (毫秒)",
+    "submit": "開始轉寫",
+    "acceptHint": "目前僅支援 WAV 檔案"
+  },
+  "voice": {
+    "record": "開始錄音",
+    "stop": "停止",
+    "recording": "錄音中",
+    "transcribing": "正在轉寫...",
+    "speaking": "播放語音..."
+  },
+  "settings": {
+    "title": "設定",
+    "apiBaseUrl": "API 位址",
+    "streaming": "使用串流",
+    "language": "介面語言",
+    "save": "儲存"
+  },
+  "common": {
+    "copy": "複製",
+    "copied": "已複製",
+    "download": "下載",
+    "error": "錯誤"
+  }
+}

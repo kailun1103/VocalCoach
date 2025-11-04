@@ -39,6 +39,7 @@ class STTService:
             return self._mock_transcription(audio_path)
 
         with tempfile.TemporaryDirectory(prefix="whisper_tmp_") as tmp_dir:
+            # Whisper writes its outputs next to the provided prefix; we clean them up afterwards.
             output_prefix = Path(tmp_dir) / "transcription"
             command = [
                 str(self.binary_path),
@@ -75,9 +76,11 @@ class STTService:
                 raise RuntimeError("Speech-to-text inference failed") from exc
 
     def _is_runtime_available(self) -> bool:
+        """Return True when both the whisper binary and model file exist."""
         return self.binary_path.exists() and self.model_path.exists()
 
     def _mock_transcription(self, audio_path: Optional[Path]) -> str:
+        """Return a deterministic placeholder transcription used during mocks."""
         log.warning(
             "Using mock transcription. Verify whisper.cpp binary and model paths."
         )

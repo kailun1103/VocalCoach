@@ -13,6 +13,7 @@ pip-wheel-metadata/
 *.eggs/
 dist/
 build/
+frontend/dist/
 
 # Tooling and test outputs
 .pytest_cache/
@@ -81,3 +82,4 @@ whisper.cpp/**/*.pdb
 whisper.cpp/models/*.bin
 whisper.cpp/models/*.ggml
 whisper.cpp/models/*.gguf
+**/node_modules/

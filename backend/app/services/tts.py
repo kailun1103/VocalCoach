@@ -67,6 +67,8 @@ class TTSService:
                 command,
                 input=text,
                 text=True,
+                encoding="utf-8",
+                errors="ignore",
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 check=True,
@@ -89,6 +91,7 @@ class TTSService:
         return encoded, sample_rate
 
     def _is_runtime_available(self) -> bool:
+        """Return True when both the Piper binary and voice model are present."""
         return self.binary_path.exists() and self.model_path.exists()
 
     def _mock_audio(self) -> Tuple[str, int]:
