@@ -2,21 +2,35 @@ from pydantic import BaseModel, Field
 
 
 class GrammarCheckRequest(BaseModel):
-    text: str = Field(..., description="Text to evaluate for grammatical correctness.")
+    """
+    文法檢查請求結構
+    
+    說明:
+        定義文法檢查 API 的請求參數。
+        前端使用 GrammarCheckRequest，結構完全相同。
+    """
+    text: str = Field(..., description="要評估文法正確性的文字")
     model: str | None = Field(
         default=None,
-        description="Optional override model name used for grammar checking.",
+        description="可選的覆蓋模型名稱（用於文法檢查）",
     )
 
 
 class GrammarCheckResponse(BaseModel):
-    is_correct: bool = Field(..., description="Indicates whether the original text is grammatically sound.")
-    feedback: str = Field(..., description="Explanation about any issues or confirmation of correctness.")
+    """
+    文法檢查回應結構
+    
+    說明:
+        定義文法檢查 API 的回應格式。
+        前端使用 GrammarCheckResponse，結構完全相同。
+    """
+    is_correct: bool = Field(..., description="指示原始文字是否文法正確")
+    feedback: str = Field(..., description="關於問題的說明或正確性確認")
     suggestion: str | None = Field(
         default=None,
-        description="Suggested revision of the text when applicable.",
+        description="適用時提供的文字修正建議",
     )
     model: str | None = Field(
         default=None,
-        description="Model name reported by the backend for grammar checking.",
+        description="後端用於文法檢查的模型名稱",
     )

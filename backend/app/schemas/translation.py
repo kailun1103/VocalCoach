@@ -2,20 +2,32 @@ from pydantic import BaseModel, Field
 
 
 class TranslationRequest(BaseModel):
-    text: str = Field(..., description="Source text to translate.")
+    """
+    翻譯請求結構
+    
+    說明:
+        定義翻譯 API 的請求參數。
+    """
+    text: str = Field(..., description="要翻譯的原始文字")
     target_language: str | None = Field(
         default="zh-TW",
-        description="BCP-47 language tag for the translation output; defaults to Traditional Chinese.",
+        description="翻譯輸出的 BCP-47 語言標籤；預設為繁體中文",
     )
     model: str | None = Field(
         default=None,
-        description="Optional override model name; falls back to configured translation model.",
+        description="可選的覆蓋模型名稱；回退到配置的翻譯模型",
     )
 
 
 class TranslationResponse(BaseModel):
-    translated_text: str = Field(..., description="Translated text output.")
+    """
+    翻譯回應結構
+    
+    說明:
+        定義翻譯 API 的回應格式。
+    """
+    translated_text: str = Field(..., description="翻譯後的文字輸出")
     model: str | None = Field(
         default=None,
-        description="Model name reported by backend for translation.",
+        description="後端用於翻譯的模型名稱",
     )

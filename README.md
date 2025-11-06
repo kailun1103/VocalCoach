@@ -48,13 +48,7 @@ data/                      # Persisted audio artifacts (created at runtime)
 
 ### Run the backend
 
-```
-cd backend
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
+cd "c:\Users\d93xj\OneDrive\Desktop\speak practice\backend" ; python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ## Frontend
 
@@ -68,11 +62,7 @@ uvicorn app.main:app --reload
 
 ### Run the frontend
 
-```
-cd frontend
-npm install
-npm run dev
-```
+cd "c:\Users\d93xj\OneDrive\Desktop\speak practice\frontend" ; npm run dev
 
 ## Development Notes
 

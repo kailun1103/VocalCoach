@@ -1,4 +1,6 @@
 """
-EnglishTalk backend package initialization.
+EnglishTalk 後端套件初始化模組
+
+此模組作為後端應用程式的入口點。
 """
 
