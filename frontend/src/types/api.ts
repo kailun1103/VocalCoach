@@ -51,6 +51,8 @@ export interface ChatResponse {
 export interface GrammarCheckRequest {
   /** 要檢查的文字內容 */
   text: string
+  /** 可選的對話歷史，用於提供上下文 */
+  context?: ChatMessage[] | null
   /** 可選的模型名稱 */
   model?: string | null
 }

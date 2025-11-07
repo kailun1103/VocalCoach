@@ -107,10 +107,16 @@ def _normalize_dictionary_result(payload: str, fallback_word: str) -> Dictionary
         # 提取詞性（處理字串或列表格式）
         part_of_speech_raw = data.get("part_of_speech")
         if isinstance(part_of_speech_raw, list):
-            # 若是列表，取第一個元素或用逗號連接
+            # 若是列表，取第一個元素
             part_of_speech = part_of_speech_raw[0] if part_of_speech_raw else None
         elif isinstance(part_of_speech_raw, str):
             part_of_speech = part_of_speech_raw.strip() or None
+            # 移除重複的詞性（例如 "動詞 verb, verb" -> "動詞 verb"）
+            if part_of_speech and ',' in part_of_speech:
+                # 分割並去重
+                parts = [p.strip() for p in part_of_speech.split(',')]
+                # 取第一個非空的部分
+                part_of_speech = parts[0] if parts else None
         else:
             part_of_speech = None
         

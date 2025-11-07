@@ -1,4 +1,7 @@
+from typing import List
 from pydantic import BaseModel, Field
+
+from .chat import ChatMessage
 
 
 class GrammarCheckRequest(BaseModel):
@@ -10,6 +13,10 @@ class GrammarCheckRequest(BaseModel):
         前端使用 GrammarCheckRequest，結構完全相同。
     """
     text: str = Field(..., description="要評估文法正確性的文字")
+    context: List[ChatMessage] | None = Field(
+        default=None,
+        description="可選的對話歷史，用於提供上下文以更準確地評估回覆",
+    )
     model: str | None = Field(
         default=None,
         description="可選的覆蓋模型名稱（用於文法檢查）",

@@ -58,13 +58,18 @@ export default function ChatPage() {
   }, [messages])
 
   // Kick off grammar checking for user messages as they appear in the transcript.
-  const queueGrammarCheck = useCallback(
-    async (messageId: string, text: string) => {
+  const queueGrammarCheckWithContext = useCallback(
+    async (messageId: string, text: string, messageIndex: number) => {
       const trimmed = text.trim()
       if (!trimmed) return
       setGrammarStates((prev) => ({ ...prev, [messageId]: { loading: true } }))
       try {
-        const result = await grammarCheck({ text: trimmed })
+        // Get conversation context up to (but not including) the current message
+        const context = messages.slice(0, messageIndex)
+        const result = await grammarCheck({ 
+          text: trimmed,
+          context: context.length > 0 ? context : undefined
+        })
         setGrammarStates((prev) => ({ ...prev, [messageId]: { loading: false, result } }))
       } catch (error: any) {
         setGrammarStates((prev) => ({
@@ -76,7 +81,18 @@ export default function ChatPage() {
         }))
       }
     },
-    [],
+    [messages],
+  )
+
+  // Wrapper for manual grammar check (from UI button) - finds message index automatically
+  const queueGrammarCheck = useCallback(
+    (messageId: string, text: string) => {
+      // Find the message index based on messageId pattern
+      const match = messageId.match(/-msg-(\d+)$/)
+      const index = match ? parseInt(match[1], 10) : messages.length
+      queueGrammarCheckWithContext(messageId, text, index)
+    },
+    [messages.length, queueGrammarCheckWithContext],
   )
 
   useEffect(() => {
@@ -84,9 +100,9 @@ export default function ChatPage() {
       if (message.role !== 'user') return
       const messageId = `${getMessageKey(message)}-msg-${index}`
       if (grammarStates[messageId]) return
-      queueGrammarCheck(messageId, message.content)
+      queueGrammarCheckWithContext(messageId, message.content, index)
     })
-  }, [messages, grammarStates, queueGrammarCheck])
+  }, [messages, grammarStates, queueGrammarCheckWithContext])
 
   useEffect(() => {
     scrollToBottom()

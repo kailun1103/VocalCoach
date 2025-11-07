@@ -152,7 +152,7 @@ export default function ChatMessageList({
   /**
    * 計算操作選單的顯示位置
    * 
-   * 確保選單始終在視窗範圍內，即使使用者捲動頁面也不會跑出畫面。
+   * 讓選單顯示在訊息泡泡下方，確保不會超出視窗範圍。
    * 根據訊息對齊方向（左/右）調整選單的水平位置。
    */
   const computeActionMenuPosition = useCallback(
@@ -160,23 +160,31 @@ export default function ChatMessageList({
       const container = scrollBoxRef.current
       if (!container) return { top: 0, left: 0 }
 
-      const buttonRect = element.getBoundingClientRect()
+      // 找到訊息泡泡元素（操作按鈕的上一個兄弟元素）
+      const messageRow = element.closest('.message-row')
+      const messageBubble = messageRow?.querySelector('.message-bubble')
+      
+      if (!messageBubble) return { top: 0, left: 0 }
+
+      const bubbleRect = messageBubble.getBoundingClientRect()
       const containerRect = container.getBoundingClientRect()
 
-      // 計算垂直位置，確保選單不會超出頂部
-      const rawTop = buttonRect.bottom - containerRect.top + container.scrollTop + 12
-      const minTop = container.scrollTop + 20
-      const top = Math.max(rawTop, minTop)
+      // 計算垂直位置：泡泡底部 + 8px 間距
+      const top = bubbleRect.bottom - containerRect.top + container.scrollTop + 8
 
-      // 計算水平位置，根據對齊方向調整
-      let left = buttonRect.left - containerRect.left + container.scrollLeft
-      if (align === 'right') {
-        left += buttonRect.width
+      // 計算水平位置
+      let left: number
+      if (align === 'left') {
+        // 使用者訊息：從泡泡左側開始
+        left = bubbleRect.left - containerRect.left + container.scrollLeft
+      } else {
+        // 系統訊息：從泡泡右側向左對齊
+        left = bubbleRect.right - containerRect.left + container.scrollLeft - 450 // 選單寬度
       }
 
       // 確保選單不會超出左右邊界
-      const minLeft = container.scrollTop + 12
-      const maxLeft = container.scrollLeft + containerRect.width - 12
+      const minLeft = container.scrollLeft + 20
+      const maxLeft = container.scrollLeft + containerRect.width - 470 // 選單寬度 + 邊距
       left = Math.min(Math.max(left, minLeft), maxLeft)
 
       return { top, left }
@@ -522,6 +530,15 @@ export default function ChatMessageList({
           aria-label="訊息操作"
           onClick={(event) => event.stopPropagation()}
         >
+          {/* 關閉按鈕 */}
+          <button
+            type="button"
+            className="message-action-menu__close"
+            onClick={handleBackdropClick}
+            aria-label="關閉"
+          >
+            ×
+          </button>
           {actionMenu.showGrammar ? (
             <>
               {/* 文法檢查按鈕 */}
@@ -554,14 +571,14 @@ export default function ChatMessageList({
                     }`}
                   >
                     {grammarStateFor(actionMenu.id).result?.is_correct
-                      ? '文法看起來很完美！'
-                      : '發現文法需要調整。'}
+                      ? '表達得很好！'
+                      : '發現可改進之處。'}
                   </div>
                   
-                  {/* 建議修正 */}
+                  {/* 建議修正（總是顯示） */}
                   {grammarStateFor(actionMenu.id).result?.suggestion ? (
                     <div className="message-menu-grammar-suggestion">
-                      {'建議詞句：'}
+                      {'建議句子：'}
                       <span className="message-menu-grammar-suggestion__text">
                         {grammarStateFor(actionMenu.id).result?.suggestion}
                       </span>

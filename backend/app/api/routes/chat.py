@@ -88,10 +88,9 @@ def _validate_response(content: str) -> Tuple[bool, str]:
 def _build_retry_instruction(reason: str) -> str:
     """Explain the failure reason and restate the formatting rules."""
     return (
-        "Rewrite your previous answer right now so it follows every rule: "
-        "one paragraph between 80 and 100 English words, no quotation marks, "
-        "no emoji, no special symbols (# * / % -), no apostrophes, no bullet lists, "
-        "and keep natural commas. You failed because "
+        "Rewrite your previous answer now so it follows every rule: respond in two or three sentences, "
+        "use a total of five to fifteen English words, avoid quotation marks, emoji, special symbols "
+        "(# * / % -), apostrophes, and bullet lists, and keep commas natural. You failed because "
         f"{reason}. Produce a corrected answer immediately."
     )
 
